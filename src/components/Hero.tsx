@@ -18,7 +18,7 @@ export default function Hero() {
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl">
         <div className="mb-8">
           <img 
-            src="public/sudhanshu.jpg" 
+            src="/sudhanshu.jpg" 
             alt="Sudhanshu Kumar"
             className="w-32 h-32 rounded-full mx-auto border-2 border-cyan-500 p-1"
           />

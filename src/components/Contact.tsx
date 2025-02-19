@@ -29,12 +29,12 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 bg-black relative">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(0,200,255,0.1),transparent_50%)]" />
+    <section id="contact" className="py-20 bg-gray-900 relative">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(147,51,234,0.1),transparent_50%)]" />
       
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <h2 className="text-3xl sm:text-4xl font-bold text-center mb-16">
-          <span className="bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
             Get In Touch
           </span>
         </h2>
@@ -86,7 +86,7 @@ export default function Contact() {
                 name="message"
                 rows={6}
                 required
-                className="w-full px-4 py-3 bg-black/50 border border-cyan-500/20 rounded-lg focus:border-cyan-500/40 focus:ring-1 focus:ring-cyan-500/40 text-white placeholder-gray-500 transition-colors resize-none"
+                className="w-full px-4 py-3 bg-gray-800/50 border border-purple-500/20 rounded-lg focus:border-purple-500/40 focus:ring-1 focus:ring-purple-500/40 text-white placeholder-gray-500 transition-colors resize-none"
                 placeholder="Your message here..."
               />
             </div>
@@ -94,7 +94,7 @@ export default function Contact() {
             <button
               type="submit"
               disabled={status === 'sending'}
-              className="w-full inline-flex items-center justify-center px-6 py-3 border border-cyan-500 text-cyan-500 rounded-lg hover:bg-cyan-500/10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full inline-flex items-center justify-center px-6 py-3 border border-purple-500 text-purple-500 rounded-lg hover:bg-purple-500/10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {status === 'sending' ? (
                 'Sending...'
@@ -107,7 +107,7 @@ export default function Contact() {
             </button>
 
             {status === 'success' && (
-              <p className="#06b6d4 text-center">Message sent successfully!</p>
+              <p className="text-purple-400 text-center">Message sent successfully!</p>
             )}
             {status === 'error' && (
               <p className="text-red-500 text-center">Failed to send message. Please try again.</p>
@@ -140,7 +140,7 @@ const Input = ({
       type={type}
       name={name}
       required={required}
-      className="w-full px-4 py-3 bg-black/50 border border-cyan-500/20 rounded-lg focus:border-cyan-500/40 focus:ring-1 focus:ring-cyan-500/40 text-white placeholder-gray-500 transition-colors"
+      className="w-full px-4 py-3 bg-gray-800/50 border border-purple-500/20 rounded-lg focus:border-purple-500/40 focus:ring-1 focus:ring-purple-500/40 text-white placeholder-gray-500 transition-colors"
       placeholder={placeholder}
     />
   </div>
@@ -158,11 +158,11 @@ const ContactInfo = ({
   href?: string;
 }) => (
   <div className="flex items-start space-x-4">
-    <div className="text-cyan-500">{icon}</div>
+    <div className="text-purple-500">{icon}</div>
     <div>
       <h4 className="text-gray-300 font-medium">{title}</h4>
       {href ? (
-        <a href={href} className="text-gray-400 hover:text-cyan-500 transition-colors">
+        <a href={href} className="text-gray-400 hover:text-purple-500 transition-colors">
           {value}
         </a>
       ) : (

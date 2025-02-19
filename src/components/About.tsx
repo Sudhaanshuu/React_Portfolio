@@ -2,12 +2,12 @@ import { Code2, GraduationCap, Award, Terminal } from 'lucide-react';
 
 export default function About() {
   return (
-    <section id="about" className="py-20 bg-black relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(0,200,255,0.1),transparent_50%)]" />
+    <section id="about" className="py-20 bg-gray-900 relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(147,51,234,0.1),transparent_50%)]" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <h2 className="text-3xl sm:text-4xl font-bold text-center mb-16">
-          <span className="bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
             About Me
           </span>
         </h2>
@@ -43,18 +43,18 @@ const EducationCard = ({ title, institution, period, grade }: {
   period: string; 
   grade: string; 
 }) => (
-  <div className="p-6 rounded-lg border border-cyan-500/20 bg-black/50 backdrop-blur-sm hover:border-cyan-500/40 transition-colors">
-    <GraduationCap className="w-8 h-8 text-cyan-500 mb-4" />
+  <div className="p-6 rounded-lg border border-purple-500/20 bg-gray-800/50 backdrop-blur-sm hover:border-purple-500/40 transition-colors">
+    <GraduationCap className="w-8 h-8 text-purple-400 mb-4" />
     <h3 className="text-xl font-semibold text-white mb-2">{title}</h3>
     <p className="text-gray-400">{institution}</p>
-    <p className="text-cyan-500">{period}</p>
+    <p className="text-purple-500">{period}</p>
     <p className="text-gray-300 mt-2">{grade}</p>
   </div>
 );
 
 const AchievementsCard = () => (
-  <div className="p-6 rounded-lg border border-cyan-500/20 bg-black/50 backdrop-blur-sm hover:border-cyan-500/40 transition-colors">
-    <Award className="w-8 h-8 text-cyan-500 mb-4" />
+  <div className="p-6 rounded-lg border border-purple-500/20 bg-gray-800/50 backdrop-blur-sm hover:border-purple-500/40 transition-colors">
+    <Award className="w-8 h-8 text-purple-400 mb-4" />
     <h3 className="text-xl font-semibold text-white mb-4">Key Achievements</h3>
     <ul className="space-y-2 text-gray-400">
       <li>• Global rank 200 on LeetCode weekly Contest</li>
@@ -65,8 +65,8 @@ const AchievementsCard = () => (
 );
 
 const SkillsSection = () => (
-  <div className="p-6 rounded-lg border border-cyan-500/20 bg-black/50 backdrop-blur-sm">
-    <Terminal className="w-8 h-8 text-cyan-500 mb-4" />
+  <div className="p-6 rounded-lg border border-purple-500/20 bg-gray-800/50 backdrop-blur-sm">
+    <Terminal className="w-8 h-8 text-purple-400 mb-4" />
     <h3 className="text-xl font-semibold text-white mb-4">Technical Skills</h3>
     <div className="grid grid-cols-2 gap-4">
       <SkillCategory title="Programming" skills={['Java', 'C','C++','Python']} />
@@ -79,7 +79,7 @@ const SkillsSection = () => (
 
 const SkillCategory = ({ title, skills }: { title: string; skills: string[] }) => (
   <div>
-    <h4 className="text-cyan-500 mb-2">{title}</h4>
+    <h4 className="text-purple-500 mb-2">{title}</h4>
     <ul className="space-y-1">
       {skills.map((skill, index) => (
         <li key={index} className="text-gray-400">• {skill}</li>
@@ -89,9 +89,9 @@ const SkillCategory = ({ title, skills }: { title: string; skills: string[] }) =
 );
 
 const CertificationsSection = () => (
-  <div className="p-6 rounded-lg border border-cyan-500/20 bg-black/50 backdrop-blur-sm">
-    <Code2 className="w-8 h-8 text-cyan-500 mb-4" />
-    <h3 className="text-xl font-semibold text-white mb-4">Certifications / Achivement</h3>
+  <div className="p-6 rounded-lg border border-purple-500/20 bg-gray-800/50 backdrop-blur-sm">
+    <Code2 className="w-8 h-8 text-purple-400 mb-4" />
+    <h3 className="text-xl font-semibold text-white mb-4">Certifications / Achievements</h3>
     <ul className="space-y-3 text-gray-400">
       <li>• Cisco Certified Network Associate (CCNA)</li>
       <li>• C++ Certification from IIT Bombay</li>

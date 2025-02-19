@@ -1,88 +1,112 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import { Github, Linkedin, Code2, BookOpen, ExternalLink } from 'lucide-react';
+
+interface Particle {
+  x: number;
+  y: number;
+  size: number;
+  speedX: number;
+  speedY: number;
+  color: string;
+  update: () => void;
+  draw: (ctx: CanvasRenderingContext2D) => void;
+}
 
 const HeroSection = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const animationFrameRef = useRef<number>();
+  const particlesRef = useRef<Particle[]>([]);
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const particles: Particle[] = [];
-    const particleCount = 100;
-
-    class Particle {
-      x: number;
-      y: number;
-      size: number;
-      speedX: number;
-      speedY: number;
-      color: string;
-
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 3;
-        this.speedX = Math.random() * 2 - 1;
-        this.speedY = Math.random() * 2 - 1;
-        this.color = `rgba(147, 51, 234, ${Math.random() * 0.5})`;
-      }
-
+  const createParticle = useCallback((canvas: HTMLCanvasElement): Particle => {
+    return {
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      size: Math.random() * 3,
+      speedX: Math.random() * 2 - 1,
+      speedY: Math.random() * 2 - 1,
+      color: `rgba(147, 51, 234, ${Math.random() * 0.5})`,
       update() {
         this.x += this.speedX;
-        this.y += this.speedY;
-
         if (this.x > canvas.width) this.x = 0;
         if (this.x < 0) this.x = canvas.width;
+        
+        this.y += this.speedY;
         if (this.y > canvas.height) this.y = 0;
         if (this.y < 0) this.y = canvas.height;
-      }
-
-      draw() {
-        if (!ctx) return;
+      },
+      draw(ctx: CanvasRenderingContext2D) {
         ctx.fillStyle = this.color;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
       }
-    }
+    };
+  }, []);
 
-    for (let i = 0; i < particleCount; i++) {
-      particles.push(new Particle());
-    }
+  const initCanvas = useCallback((canvas: HTMLCanvasElement) => {
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
+    
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    
+    ctx.scale(dpr, dpr);
+    canvas.style.width = `${rect.width}px`;
+    canvas.style.height = `${rect.height}px`;
+    
+    return ctx;
+  }, []);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = initCanvas(canvas);
+    if (!ctx) return;
+
+    const particleCount = Math.min(100, Math.floor((canvas.width * canvas.height) / 10000));
+    particlesRef.current = Array.from({ length: particleCount }, () => createParticle(canvas));
 
     const animate = () => {
-      if (!ctx) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      particles.forEach(particle => {
+      particlesRef.current.forEach(particle => {
         particle.update();
-        particle.draw();
+        particle.draw(ctx);
       });
 
-      requestAnimationFrame(animate);
+      animationFrameRef.current = requestAnimationFrame(animate);
     };
 
     animate();
 
     const handleResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      if (!canvas) return;
+      const newCtx = initCanvas(canvas);
+      if (!newCtx) return;
+      
+      // Recreate particles for new dimensions
+      const newParticleCount = Math.min(100, Math.floor((canvas.width * canvas.height) / 10000));
+      particlesRef.current = Array.from({ length: newParticleCount }, () => createParticle(canvas));
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+    const resizeObserver = new ResizeObserver(handleResize);
+    resizeObserver.observe(canvas);
+
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+      resizeObserver.disconnect();
+    };
+  }, [createParticle, initCanvas]);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-900">
-      <canvas ref={canvasRef} className="absolute inset-0 z-0" />
+      <canvas ref={canvasRef} className="absolute inset-0 z-0 w-full h-full" />
       
       <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 to-gray-900/50" />
       

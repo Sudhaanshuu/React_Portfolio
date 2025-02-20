@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import { Github, Linkedin, Code2, BookOpen, ExternalLink } from 'lucide-react';
 
 interface Particle {

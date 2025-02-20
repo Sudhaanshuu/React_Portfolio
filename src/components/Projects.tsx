@@ -1,7 +1,18 @@
 import { Github, Brain, Shield, Book, School, Cpu, Briefcase } from 'lucide-react';
 import { motion } from 'framer-motion';
+import React from 'react';
 
-const projects = [
+// Define the types for ProjectCard props
+interface ProjectCardProps {
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+  tech: string[];
+  github: string;
+}
+
+// Define the type for each project
+const projects: ProjectCardProps[] = [
   {
     title: 'Arogyam Kiosk',
     description: 'AI/ML-based website with five models for disease prediction and an NLP chatbot, enhancing healthcare accessibility and personalization.',
@@ -68,7 +79,8 @@ export default function Projects() {
   );
 }
 
-const ProjectCard = ({
+// Correctly typed ProjectCard component
+const ProjectCard: React.FC<ProjectCardProps> = ({
   title,
   description,
   icon,
@@ -86,7 +98,7 @@ const ProjectCard = ({
       <p className="text-gray-400 mb-4">{description}</p>
       
       <div className="flex flex-wrap gap-2 mb-4">
-        {tech.map((t, i) => (
+        {tech.map((t: string, i: number) => (
           <span
             key={i}
             className="px-2 py-1 text-xs rounded-full border border-purple-500/30 text-purple-500"

@@ -59,7 +59,7 @@ const projects: ProjectCardProps[] = [
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-20 bg-black relative">
+    <section id="projects" className="py-20 bg-gray-900 relative">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(200,0,255,0.1),transparent_50%)]" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -90,7 +90,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   <motion.div
     whileHover={{ scale: 1.05, boxShadow: '0px 10px 20px rgba(200, 0, 255, 0.3)' }}
     transition={{ type: 'spring', stiffness: 200, damping: 10 }}
-    className="group relative rounded-lg overflow-hidden border border-purple-500/20 bg-black/50 backdrop-blur-sm hover:border-purple-500/40 transition-all duration-300"
+    className="group relative rounded-lg overflow-hidden border border-purple-500/20 text-gray-400 backdrop-blur-sm hover:border-purple-500/40 transition-all duration-300"
   >
     <div className="p-6">
       <div className="text-purple-500 mb-4">{icon}</div>

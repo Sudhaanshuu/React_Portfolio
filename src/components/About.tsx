@@ -147,6 +147,7 @@ const AchievementsSection = () => (
         '1st place in Jagran Junior Award (2019)',
         'World Skill State level Finalist in Cloud Computing (2024)',
         '1st place in Block level Chess Contest (2022)',
+        'CCNA Certification',
         'C++ Certification from IIT Bombay'
       ].map((achievement, index) => (
         <motion.li
